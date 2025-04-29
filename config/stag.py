@@ -27,8 +27,7 @@ RUN_MODE = "STAGING"
 # LOGGING = set_log_level(locals())
 
 # 预发布环境数据库可以在这里配置
-DATABASES.update(
-    {
+DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ.get('MYSQL_NAME'),
@@ -43,7 +42,7 @@ DATABASES.update(
             },
         },
     }
-)
+
 
 # 前后端开发模式下支持跨域配置
 if FRONTEND_BACKEND_SEPARATION:
