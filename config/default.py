@@ -15,6 +15,7 @@ from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
 
 MYSQL_CA = os.environ.get('MYSQL_CA')
+print("MYSQL_CA: %s" % MYSQL_CA)
 print(MYSQL_CA)
 DATABASES = {
         'default': {
