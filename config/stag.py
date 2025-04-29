@@ -37,7 +37,7 @@ DATABASES = {
             'PORT': os.environ.get('MYSQL_PORT'),
             'OPTIONS': {
                 'ssl': {
-                    'ssl_ca': os.environ.get('MYSQL_CA'),
+                    'ssl_ca': os.environ.get('MYSQL_C'),
                     'check_hostname': False,
                 },
             },
