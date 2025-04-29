@@ -15,6 +15,7 @@ from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
 
 MYSQL_CA = os.environ.get('MYSQL_CA')
+print(MYSQL_CA)
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -25,8 +26,7 @@ DATABASES = {
             'PORT': os.environ.get('MYSQL_PORT'),
             'OPTIONS': {
                 'ssl': {
-                    'ssl_ca': MYSQL_CA,
-                    'ssl_cert':  os.environ.get('MYSQL_CA'),
+                    'ca': MYSQL_CA,
                 },
             },
         },
