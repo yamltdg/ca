@@ -22,7 +22,12 @@ DATABASES = {
             'USER': os.environ.get('MYSQL_USER'),
             'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
             'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': MYSQL_CA,
+            'PORT': os.environ.get('MYSQL_PORT'),
+            'OPTIONS': {
+                'ssl': {
+                    'ca': MYSQL_CA,
+                },
+            },
         },
     }
 # 这里是默认的 INSTALLED_APPS，大部分情况下，不需要改动
