@@ -38,10 +38,12 @@ DATABASES = {
             'OPTIONS': {
                 'ssl': {
                     'ca': os.environ.get('MYSQL_CA'),
+                    'check_hostname': False,
                 },
             },
         },
     }
+
 
 
 # 前后端开发模式下支持跨域配置
