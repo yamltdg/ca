@@ -28,16 +28,7 @@ RUN_MODE = "STAGING"
 
 # 预发布环境数据库可以在这里配置
 
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('MYSQL_NAME'),
-            'USER': os.environ.get('MYSQL_USER'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-            'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': os.environ.get('MYSQL_PORT'),
-        },
-    }
+
 
 
 
