@@ -14,6 +14,8 @@ specific language governing permissions and limitations under the License.
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
 
+MYSQL_CA = os.environ.get('MYSQL_CA')
+
 # 这里是默认的 INSTALLED_APPS，大部分情况下，不需要改动
 # 如果你已经了解每个默认 APP 的作用，确实需要去掉某些 APP，请去掉下面的注释，然后修改
 # INSTALLED_APPS = (
@@ -37,7 +39,7 @@ INSTALLED_APPS += (
     "bk_framework_app",
     "rest_framework",
     "drf_yasg",
-    
+
 )
 
 # 这里是默认的中间件，大部分情况下，不需要改动
@@ -106,7 +108,6 @@ LOGGING = get_logging_config_dict(locals())
 # 初始化管理员列表，列表中的人员将拥有预发布环境和正式环境的管理员权限
 # 注意：请在首次提测和上线前修改，之后的修改将不会生效
 INIT_SUPERUSER = []
-
 
 # 使用mako模板时，默认打开的过滤器：h(过滤html)
 MAKO_DEFAULT_FILTERS = ["h"]
