@@ -13,15 +13,8 @@ specific language governing permissions and limitations under the License.
 
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
-import ssl
 
 MYSQL_CA = os.environ.get('MYSQL_CA')
-print("MYSQL_CA: %s" % MYSQL_CA)
-print(MYSQL_CA)
-if os.path.exists(MYSQL_CA):
-    print("文件存在")
-else:
-    print("文件不存在")
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -33,13 +26,13 @@ DATABASES = {
         'OPTIONS': {
             'ssl': {
                 'ca': MYSQL_CA,
+                'check_hostname': False,
             },
         },
     },
 }
 
 print("DATABASES: %s" % DATABASES)
-print(DATABASES)
 # 这里是默认的 INSTALLED_APPS，大部分情况下，不需要改动
 # 如果你已经了解每个默认 APP 的作用，确实需要去掉某些 APP，请去掉下面的注释，然后修改
 # INSTALLED_APPS = (
