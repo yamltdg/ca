@@ -14,28 +14,29 @@ specific language governing permissions and limitations under the License.
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
 import ssl
+
 MYSQL_CA = os.environ.get('MYSQL_CA')
 print("MYSQL_CA: %s" % MYSQL_CA)
 print(MYSQL_CA)
-
+if os.path.exists(MYSQL_CA):
+    print("文件存在")
+else:
+    print("文件不存在")
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('MYSQL_NAME'),
-            'USER': os.environ.get('MYSQL_USER'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
-            'HOST': os.environ.get('MYSQL_HOST'),
-            'PORT': os.environ.get('MYSQL_PORT'),
-            'OPTIONS': {
-                'ssl': {
-                    'ca': MYSQL_CA,
-                },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQL_NAME'),
+        'USER': os.environ.get('MYSQL_USER'),
+        'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
+        'HOST': os.environ.get('MYSQL_HOST'),
+        'PORT': os.environ.get('MYSQL_PORT'),
+        'OPTIONS': {
+            'ssl': {
+                'ca': MYSQL_CA,
             },
         },
-    }
-context = ssl.create_default_context()
-context.load_verify_locations('MYSQL_CA')
-
+    },
+}
 
 print("DATABASES: %s" % DATABASES)
 print(DATABASES)
