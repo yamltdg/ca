@@ -129,6 +129,7 @@ app.conf.broker_url = f"amqps://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HO
 
 # 配置 SSL 设置
 app.conf.broker_use_ssl = {
+    'ca_certs': os.environ.get("RABBITMQ_CA"),
     'certfile': os.environ.get("RABBITMQ_CERT"),
     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
     'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
