@@ -31,7 +31,7 @@ RUN_MODE = "STAGING"
 # 预发布环境数据库可以在这里配置
 
 
-CELERY_BROKER_USE_SSL = {
+broker_use_ssl = {
     'ca_certs': os.environ.get("RABBITMQ_CA"),
     'certfile': os.environ.get("RABBITMQ_CERT"),
     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),  # 假设这是你的私钥文件路径
