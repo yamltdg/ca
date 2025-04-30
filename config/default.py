@@ -116,7 +116,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # 配置 SSL 设置
 app.conf.broker_use_ssl = {
-    'ca_certs': os.environ.get("RABBITMQ_A"),
     'certfile': os.environ.get("RABBITMQ_CERT"),
     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
     'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
