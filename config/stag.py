@@ -32,7 +32,6 @@ RUN_MODE = "STAGING"
 
 
 broker_use_ssl = {
-    'ca_certs': os.environ.get("RABBITMQ_CA"),
     'certfile': os.environ.get("RABBITMQ_CERT"),
     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),  # 假设这是你的私钥文件路径
     'cert_reqs': ssl.CERT_REQUIRED,  # 强制要求验证服务器的证书
