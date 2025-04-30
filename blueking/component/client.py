@@ -123,7 +123,7 @@ class ComponentClientWithSignature(BaseComponentClient):
         # determine whether access test environment of third-party system
         headers = kwargs.pop("headers", {})
         if self.use_test_env:
-            headers["x-use-test-env"] = "1"
+            headers["x-use-test-.env"] = "1"
         if self.language:
             headers["blueking-language"] = self.language
 
