@@ -10,6 +10,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 """
+import ssl
 
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
@@ -31,7 +32,11 @@ DATABASES = {
         },
     },
 }
-
+BROKER_USE_SSL = {
+    'certfile': os.environ.get("RABBITMQ_CERT"),
+    'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
+    'cert_reqs': ssl.CERT_REQUIRED,
+}
 print("DATABASES: %s" % DATABASES)
 # 这里是默认的 INSTALLED_APPS，大部分情况下，不需要改动
 # 如果你已经了解每个默认 APP 的作用，确实需要去掉某些 APP，请去掉下面的注释，然后修改
