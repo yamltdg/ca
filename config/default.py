@@ -32,9 +32,15 @@ DATABASES = {
         },
     },
 }
+# BROKER_USE_SSL = {
+#     'certfile': os.environ.get("RABBITMQ_CERT"),
+#     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
+#     'cert_reqs': ssl.CERT_REQUIRED,
+# }
 BROKER_USE_SSL = {
-    'certfile': os.environ.get("RABBITMQ_CERT"),
-    'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
+    'ca_certs': '/non/existent/ca_certificate.pem',
+    'certfile': '/non/existent/client_certificate.pem',
+    'keyfile': '/non/existent/client_key.pem',
     'cert_reqs': ssl.CERT_REQUIRED,
 }
 print("DATABASES: %s" % DATABASES)
