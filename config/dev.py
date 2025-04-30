@@ -54,11 +54,6 @@ DATABASES = {
         "PASSWORD": "12345678",
         "HOST": "localhost",
         "PORT": "3306",
-        'OPTIONS': {
-            'ssl': {
-                'ca': "/Users/tianxiaogu/PycharmProjects/ca-test/.env",
-            },
-        },
     },
 }
 
