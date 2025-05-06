@@ -67,7 +67,8 @@ class HealthzViewSet(ViewSet):
         multiplicand = 4
         res = multiply.delay(int(multiplier), int(multiplicand))
         return Response({"id": res.id})
-    @action(detail=False, methods=["get"], url_path="ca_res")
+
+    @action(detail=False, methods=["get"], url_path="res")
     def res(self, request, *args, **kwargs):
         task_id = request.query_params.get('task_id')
         result = AsyncResult(task_id, app=app)
