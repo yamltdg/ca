@@ -10,11 +10,21 @@ Unless required by applicable law or agreed to in writing, software distributed 
 an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 """
-
+from blueapps.account.decorators import login_exempt
+from blueapps.core.celery.celery import app
+from celery.result import AsyncResult
+from django.utils.decorators import method_decorator
+from django_celery_results.models import TaskResult
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ViewSet
+from .tasks import multiply
 
 from .serializers import UserSerializer
 
@@ -38,6 +48,7 @@ class HealthzViewSet(ViewSet):
         """
         获取应用健康状态
         """
+
         return Response({"healthy": True})
 
     @action(detail=False, methods=["get"], url_path="ping")
@@ -46,3 +57,22 @@ class HealthzViewSet(ViewSet):
         应用ping 接口
         """
         return Response("pong")
+
+    @action(detail=False, methods=["get"], url_path="ca")
+    def ca(self, request, *args, **kwargs):
+        """
+        应用ping 接口
+        """
+        multiplier = 3
+        multiplicand = 4
+        res = multiply.delay(int(multiplier), int(multiplicand))
+        return res
+
+    @action(detail=False, methods=["get"], url_path="ca_res")
+    def res(self, request, *args, **kwargs):
+        task_id = request.query_params.get('task_id')
+        result = AsyncResult(task_id, app=app)
+        if result.ready():
+            return Response({"task_id": task_id, "status": result.status, "result": result.result})
+        else:
+            return Response({"task_id": task_id, "status": result.status})
