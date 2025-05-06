@@ -10,11 +10,9 @@ Unless required by applicable law or agreed to in writing, software distributed 
 an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 """
-import ssl
 
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
-from celery import Celery
 
 MYSQL_CA = os.environ.get('MYSQL_CA')
 DATABASES = {
@@ -124,25 +122,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 #     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
 #     'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
 # }
-# # 配置 SSL 设置
-# app.conf.broker_use_ssl = {
-#     'ca_certs': os.environ.get("RABBITMQ_CA"),
-#     'certfile': os.environ.get("RABBITMQ_CERT"),
-#     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
-#     'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
-# }
-# app.conf.broker_url = 'amqp://root:root@localhost:5671//'
-# CELERY_BROKER_URL = "amqps://root:root@localhost:5671//"
-# CELERY_BROKER_USE_SSL = {
-#     'ca_certs': os.getenv("RABBITMQ_CA", "/etc/ssl/ca.crt"),
-#     'cert_reqs': ssl.CERT_REQUIRED,
-# }
-
-# 创建 Celery 对象
-
-# 配置 Broker URL 使用 amqps 来启用 SSL
-# app.conf.broker_url = f"amqps://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}:{RABBITMQ_PORT}/{RABBITMQ_VHOST}"
-
 
 
 # CELERY 开关，使用时请改为 True，修改项目目录下的 Procfile 文件，添加以下两行命令：
