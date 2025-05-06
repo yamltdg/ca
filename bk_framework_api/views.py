@@ -10,20 +10,14 @@ Unless required by applicable law or agreed to in writing, software distributed 
 an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 """
-from blueapps.account.decorators import login_exempt
-from blueapps.core.celery.celery import app
 from celery.result import AsyncResult
-from django.utils.decorators import method_decorator
-from django_celery_results.models import TaskResult
-from drf_yasg import openapi
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-from rest_framework.views import APIView
+
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ViewSet
+
+from config.default import app
 from .tasks import multiply
 
 from .serializers import UserSerializer
