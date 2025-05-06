@@ -10,9 +10,11 @@ Unless required by applicable law or agreed to in writing, software distributed 
 an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 """
+import ssl
 
 from blueapps.conf.default_settings import *  # noqa
 from blueapps.conf.log import get_logging_config_dict
+from celery import Celery
 
 MYSQL_CA = os.environ.get('MYSQL_CA')
 DATABASES = {
@@ -100,28 +102,26 @@ STATIC_VERSION = "1.0"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
-# app = Celery('proj')
-# RABBITMQ_VHOST = os.getenv("RABBITMQ_VHOST")
-# RABBITMQ_PORT = 5671
-# RABBITMQ_HOST = os.getenv("RABBITMQ_HOST")
-# RABBITMQ_USER = os.getenv("RABBITMQ_USER")
-# RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD")
-# BROKER_URL = "amqp://{user}:{password}@{host}:{port}/{vhost}".format(
-#     user=RABBITMQ_USER,
-#     password=RABBITMQ_PASSWORD,
-#     host=RABBITMQ_HOST,
-#     port=RABBITMQ_PORT,
-#     vhost=RABBITMQ_VHOST,
-# )
-# app.conf.broker_url = f"amqps://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}:{RABBITMQ_PORT}/{RABBITMQ_VHOST}"
+app = Celery('proj')
+RABBITMQ_VHOST = os.getenv("RABBITMQ_VHOST")
+RABBITMQ_PORT = 5671
+RABBITMQ_HOST = os.getenv("RABBITMQ_HOST")
+RABBITMQ_USER = os.getenv("RABBITMQ_USER")
+RABBITMQ_PASSWORD = os.getenv("RABBITMQ_PASSWORD")
+BROKER_URL = "amqp://{user}:{password}@{host}:{port}/{vhost}".format(
+    user=RABBITMQ_USER,
+    password=RABBITMQ_PASSWORD,
+    host=RABBITMQ_HOST,
+    port=RABBITMQ_PORT,
+    vhost=RABBITMQ_VHOST,
+)
+app.conf.broker_url = f"amqps://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@{RABBITMQ_HOST}:{RABBITMQ_PORT}/{RABBITMQ_VHOST}"
 #
-# # 配置 SSL 设置
-# app.conf.broker_use_ssl = {
-#     'ca_certs': os.environ.get("RABBITMQ_A"),
-#     'certfile': os.environ.get("RABBITMQ_CERT"),
-#     'keyfile': os.environ.get("RABBITMQ_CERT_KEY"),
-#     'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
-# }
+# 配置 SSL 设置
+app.conf.broker_use_ssl = {
+    'ca_certs': os.environ.get("RABBITMQ_CA"),
+    'cert_reqs': ssl.CERT_REQUIRED,                   # 强制要求验证服务器的证书
+}
 
 
 # CELERY 开关，使用时请改为 True，修改项目目录下的 Procfile 文件，添加以下两行命令：
